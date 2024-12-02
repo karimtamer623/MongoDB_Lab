@@ -1,0 +1,133 @@
+use LibraryDB
+switched to db LibraryDB
+db.createCollection("Books");
+{ ok: 1 }
+db.createCollection("Members");
+{ ok: 1 }
+db.createCollection("Loans");
+{ ok: 1 }
+db.Books.insertMany([
+   { BookID: 1, Title: "The Great Gatsby", Author: "F. Scott Fitzgerald", ISBN: "9780743273565", PublishedYear: 1925, CopiesAvailable: 8 },
+   { BookID: 2, Title: "1984", Author: "George Orwell", ISBN: "9780451524935", PublishedYear: 1949, CopiesAvailable: 6 },
+   { BookID: 3, Title: "To Kill a Mockingbird", Author: "Harper Lee", ISBN: "9780061120084", PublishedYear: 1960, CopiesAvailable: 10 },
+   { BookID: 4, Title: "Pride and Prejudice", Author: "Jane Austen", ISBN: "9780141439518", PublishedYear: 1813, CopiesAvailable: 4 },
+   { BookID: 5, Title: "The Catcher in the Rye", Author: "J.D. Salinger", ISBN: "9780316769488", PublishedYear: 1951, CopiesAvailable: 5 }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('674d8aa6e1fdc31ffb78e20e'),
+    '1': ObjectId('674d8aa6e1fdc31ffb78e20f'),
+    '2': ObjectId('674d8aa6e1fdc31ffb78e210'),
+    '3': ObjectId('674d8aa6e1fdc31ffb78e211'),
+    '4': ObjectId('674d8aa6e1fdc31ffb78e212')
+  }
+}
+db.Members.insertMany([
+   { MemberID: 1, FirstName: "John", LastName: "Doe", MembershipDate: new Date("2023-06-15") },
+   { MemberID: 2, FirstName: "Jane", LastName: "Smith", MembershipDate: new Date("2024-01-22") },
+   { MemberID: 3, FirstName: "Alice", LastName: "Johnson", MembershipDate: new Date("2023-11-30") }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('674d8ab8e1fdc31ffb78e213'),
+    '1': ObjectId('674d8ab8e1fdc31ffb78e214'),
+    '2': ObjectId('674d8ab8e1fdc31ffb78e215')
+  }
+}
+db.Loans.insertMany([
+   { LoanID: 1, MemberID: 1, BookID: 2, LoanDate: new Date("2024-11-10"), ReturnDate: new Date("2024-11-17") },
+   { LoanID: 2, MemberID: 3, BookID: 4, LoanDate: new Date("2024-11-20"), ReturnDate: new Date("2024-11-27") }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('674d8abde1fdc31ffb78e216'),
+    '1': ObjectId('674d8abde1fdc31ffb78e217')
+  }
+}
+db.Books.find({});
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e20e'),
+  BookID: 1,
+  Title: 'The Great Gatsby',
+  Author: 'F. Scott Fitzgerald',
+  ISBN: '9780743273565',
+  PublishedYear: 1925,
+  CopiesAvailable: 8
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e20f'),
+  BookID: 2,
+  Title: '1984',
+  Author: 'George Orwell',
+  ISBN: '9780451524935',
+  PublishedYear: 1949,
+  CopiesAvailable: 6
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e210'),
+  BookID: 3,
+  Title: 'To Kill a Mockingbird',
+  Author: 'Harper Lee',
+  ISBN: '9780061120084',
+  PublishedYear: 1960,
+  CopiesAvailable: 10
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e211'),
+  BookID: 4,
+  Title: 'Pride and Prejudice',
+  Author: 'Jane Austen',
+  ISBN: '9780141439518',
+  PublishedYear: 1813,
+  CopiesAvailable: 4
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e212'),
+  BookID: 5,
+  Title: 'The Catcher in the Rye',
+  Author: 'J.D. Salinger',
+  ISBN: '9780316769488',
+  PublishedYear: 1951,
+  CopiesAvailable: 5
+}
+db.Members.find({ MembershipDate: { $gt: new Date("2024-01-16") } });
+{
+  _id: ObjectId('674d8ab8e1fdc31ffb78e214'),
+  MemberID: 2,
+  FirstName: 'Jane',
+  LastName: 'Smith',
+  MembershipDate: 2024-01-22T00:00:00.000Z
+}
+db.Books.find({ CopiesAvailable: { $gt: 5 } });
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e20e'),
+  BookID: 1,
+  Title: 'The Great Gatsby',
+  Author: 'F. Scott Fitzgerald',
+  ISBN: '9780743273565',
+  PublishedYear: 1925,
+  CopiesAvailable: 8
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e20f'),
+  BookID: 2,
+  Title: '1984',
+  Author: 'George Orwell',
+  ISBN: '9780451524935',
+  PublishedYear: 1949,
+  CopiesAvailable: 6
+}
+{
+  _id: ObjectId('674d8aa6e1fdc31ffb78e210'),
+  BookID: 3,
+  Title: 'To Kill a Mockingbird',
+  Author: 'Harper Lee',
+  ISBN: '9780061120084',
+  PublishedYear: 1960,
+  CopiesAvailable: 10
+}
+
+
